@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Overlay News</string>
+    <string name="app_name_caps">OVERLAY NEWS</string>
+    <string name="timing_select">Schedule</string>
+    <string name="timing_1">At every 30 mins of every hour</string>
+    <string name="timing_2">At the top of each hour</string>
+    <string name="timing_3">At the top of each 2nd hour</string>
+    <string name="duration_select">Duration</string>
+    <string name="duration_1">15 sec</string>
+    <string name="duration_2">30 sec</string>
+    <string name="duration_3">45 sec</string>
+    <string name="duration_4">1 min</string>
+    <string name="delay_select">Headline Delay</string>
+    <string name="delay_1">1 sec</string>
+    <string name="delay_2">2 sec</string>
+    <string name="delay_3">3 sec</string>
+    <string name="delay_4">4 sec</string>
+    <string name="delay_5">5 sec</string>
+    <string name="delay_6">6 sec</string>
+    <string name="delay_7">7 sec</string>
+    <string name="delay_8">8 sec</string>
+    <string name="delay_9">9 sec</string>
+    <string name="delay_10">10 sec</string>
+    <string name="toggle_turn_on">ON</string>
+    <string name="toggle_turn_off">OFF</string>
+    <string name="invalid_url">Invalid URL</string>
+    <string name="button_add">Add Site</string>
+    <string name="button_view">View Sites</string>
+    <string name="site_added">Site added: %s</string>
+
+    <!-- Default feeds -->
+    <string name="feed1_title">Top Stories - Google News</string>
+    <string name="feed1_url">http://news.google.com/news?pz=1\&amp;cf=all\&amp;ned=us\&amp;hl=en\&amp;output=rss</string>
+    <string name="feed2_title">Techmeme</string>
+    <string name="feed2_url">http://www.techmeme.com/feed.xml</string>
+    <string name="feed3_title">Entertainment News Headlines - Yahoo! News</string>
+    <string name="feed3_url">http://news.yahoo.com/rss/entertainment</string>
+    <string name="feed4_title">ESPN.com</string>
+    <string name="feed4_url">http://sports.espn.go.com/espn/rss/news</string>
+
+    <!-- About -->
+    <string name="about_title">Overlay News</string>
+    <string name="about_button_privacy_policy">Privacy Policy</string>
+    <string name="about_button_privacy_policy_url">http://blog.entertailion.com/privacy-policy</string>
+    <string name="about_button_web">Web Site</string>
+    <string name="about_button_web_url">https://github.com/entertailion/Overlay-News-for-GTV</string>
+    <string name="about_button_more_apps">More Apps</string>
+    <string name="about_button_more_apps_url">https://play.google.com/store/apps/developer?id=ENTERTAILION+LLC</string>
+    <string name="about_version_title">Overlay News %s</string>
+    <string name="about_button_feedback">Feedback</string>
+    <string name="about_button_feedback_email">overlaynews@entertailion.com</string>
+    <string name="about_copyright">\u00A9 2013 ENTERTAILION LLC. All other trademarks and copyrights are property of their respective owners. All rights reserved.</string>
+    <string name="unknown_build">Unknown</string>
+
+    <!-- Rating -->
+    <string name="rating_title">Rate Overlay News</string>
+    <string name="rating_message">If you enjoy using Overlay News, please take a moment to rate it. Thanks for your support!</string>
+    <string name="rating_ok">Rate App</string>
+    <string name="rating_remind">Remind me later</string>
+    <string name="rating_no">No, thanks</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_delete_feed_message">Are you sure you want to delete the current site?</string>
+    <string name="dialog_add_feed_title">Add Site</string>
+    <string name="dialog_add_feed">Enter the URL for the site:</string>
+    <string name="dialog_add_feed_invalid_url_title">Invalid URL</string>
+    <string name="dialog_add_feed_invalid_url">Please correct the URL for the web site</string>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <integer name="development">0</integer>
+
+    <integer name="move_animation_delay">250</integer>
+    <integer name="move_animation_delay_slow">1000</integer>
+
+</resources>
