@@ -7,6 +7,7 @@ It can be configured to get the headlines from your favorite news web sites.</p>
 <p>Features:
 <ul>
 <li>News over live TV</li>
+<li>View selected news in Chrome</li>
 <li>Configurable settings for how frequently news is displayed</li>
 <li>Support for sharing sites from Chrome</li>
 <li>Pre-configured with popular news sites</li>
@@ -15,6 +16,7 @@ It can be configured to get the headlines from your favorite news web sites.</p>
 
 <p>Instructions:
 <ul>
+<li>To view current headline in Chrome: Press the OK button when the headline is displayed and the associated web page will be displayed.</li>
 <li>To view the list of configured sites: Click on the "View Sites" button in the Overlay News app.</li>
 <li>To add a site from Chrome: Load the site in the Chrome browser on Google TV. Press the Menu button and select "Share page".</li>
 <li>To manually add a news site: Press the "Add Site" button in the Overlay News app and enter the URL for the news web site.</li>
