@@ -144,77 +144,81 @@ public class MainActivity extends Activity {
 
 		new Thread(new Runnable() {
 			public void run() {
-				long currentTime = System.currentTimeMillis();
-				// iterate through feeds in database
-				items.clear();
-				ArrayList<RssFeed> feeds = FeedsTable.getFeeds(MainActivity.this);
-				if (feeds != null) {
-					for (RssFeed feed : feeds) {
-						Log.d(LOG_TAG, "feed=" + feed.getTitle() + ", image=" + feed.getImage() + ", link=" + feed.getLink() + ", date=" + feed.getDate()
-								+ ", viewDate=" + feed.getViewDate());
-						long viewDateTime = feed.getViewDate().getTime();
-						ArrayList<RssItem> feedItems = ItemsTable.getItems(MainActivity.this, feed.getId());
-						if (feedItems != null && feedItems.size() > 0) {
-							Integer resourceId = RssFeed.getSiteIcon(feed.getLink());
-							if (resourceId != null) {
-								feed.setBitmap(loadBitmap(resourceId));
-							} else if (feed.getImage() != null) {
-								try {
-									FileInputStream fis = MainActivity.this.openFileInput(feed.getImage());
-									Bitmap bitmap = BitmapFactory.decodeStream(fis);
-									fis.close();
-									feed.setBitmap(bitmap);
-									Log.d(LOG_TAG, "logo=" + feed.getLogo());
-								} catch (Exception e) {
-									Log.d(LOG_TAG, "getFeeds", e);
+				try {
+					long currentTime = System.currentTimeMillis();
+					// iterate through feeds in database
+					items.clear();
+					ArrayList<RssFeed> feeds = FeedsTable.getFeeds(MainActivity.this);
+					if (feeds != null) {
+						for (RssFeed feed : feeds) {
+							Log.d(LOG_TAG, "feed=" + feed.getTitle() + ", image=" + feed.getImage() + ", link=" + feed.getLink() + ", date=" + feed.getDate()
+									+ ", viewDate=" + feed.getViewDate());
+							long viewDateTime = feed.getViewDate().getTime();
+							ArrayList<RssItem> feedItems = ItemsTable.getItems(MainActivity.this, feed.getId());
+							if (feedItems != null && feedItems.size() > 0) {
+								Integer resourceId = RssFeed.getSiteIcon(feed.getLink());
+								if (resourceId != null) {
+									feed.setBitmap(loadBitmap(resourceId));
+								} else if (feed.getImage() != null) {
+									try {
+										FileInputStream fis = MainActivity.this.openFileInput(feed.getImage());
+										Bitmap bitmap = BitmapFactory.decodeStream(fis);
+										fis.close();
+										feed.setBitmap(bitmap);
+										Log.d(LOG_TAG, "logo=" + feed.getLogo());
+									} catch (Exception e) {
+										Log.d(LOG_TAG, "getFeeds", e);
+									}
+								}
+								for (RssItem item : feedItems) {
+									// check if item already displayed
+									if (item.getDate().getTime() > viewDateTime) {
+										item.setBitmap(feed.getBitmap());
+										items.add(item);
+										feed.setViewDate(new Date(item.getDate().getTime()));
+									} else {
+										Log.d(LOG_TAG, "already checked: " + item.getTitle());
+									}
 								}
 							}
-							for (RssItem item : feedItems) {
-								// check if item already displayed
-								if (item.getDate().getTime() > viewDateTime) {
-									item.setBitmap(feed.getBitmap());
-									items.add(item);
-									feed.setViewDate(new Date(currentTime));
-								} else {
-									Log.d(LOG_TAG, "already checked: " + item.getTitle());
-								}
+							try {
+								// update feed last view date
+								FeedsTable.updateFeed(MainActivity.this, feed.getId(), feed.getTitle(), feed.getLink(), feed.getDescription(), feed.getDate()
+										.getTime(), feed.getViewDate().getTime(), feed.getLogo(), feed.getImage(), feed.getTtl());
+							} catch (Exception e) {
+								Log.e(LOG_TAG, "onCreate", e);
 							}
 						}
-						try {
-							// update feed last view date
-							FeedsTable.updateFeed(MainActivity.this, feed.getId(), feed.getTitle(), feed.getLink(), feed.getDescription(), feed.getDate()
-									.getTime(), feed.getViewDate().getTime(), feed.getLogo(), feed.getImage(), feed.getTtl());
-						} catch (Exception e) {
-							Log.e(LOG_TAG, "onCreate", e);
+						if (items.size()>0) {
+							// sort by date
+							Collections.sort(items, new Comparator<RssItem>() {
+
+								@Override
+								public int compare(RssItem lhs, RssItem rhs) {
+									// newest dates first
+									int comparison = lhs.getDate().compareTo(rhs.getDate());
+									if (comparison < 0) {
+										return 1;
+									} else if (comparison > 0) {
+										return -1;
+									}
+									return comparison;
+								}
+
+							});
+							startTime = System.currentTimeMillis();
+							handler.post(new Runnable() {
+								public void run() {
+									postNextItem();
+								}
+							});
+						} else {
+							Log.d(LOG_TAG, "no new news");
+							doFinish();
 						}
 					}
-					if (items.size()>0) {
-						// sort by date
-						Collections.sort(items, new Comparator<RssItem>() {
-	
-							@Override
-							public int compare(RssItem lhs, RssItem rhs) {
-								// newest dates first
-								int comparison = lhs.getDate().compareTo(rhs.getDate());
-								if (comparison < 0) {
-									return 1;
-								} else if (comparison > 0) {
-									return -1;
-								}
-								return comparison;
-							}
-	
-						});
-						startTime = System.currentTimeMillis();
-						handler.post(new Runnable() {
-							public void run() {
-								postNextItem();
-							}
-						});
-					} else {
-						Log.d(LOG_TAG, "no new news");
-						doFinish();
-					}
+				} catch (Exception e) {
+					Log.e(LOG_TAG, "run", e);
 				}
 			}
 		}).start();

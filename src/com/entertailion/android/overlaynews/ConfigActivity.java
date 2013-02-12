@@ -52,6 +52,9 @@ import com.entertailion.android.overlaynews.utils.Utils;
  * 
  */
 
+// TODO analytics for each setting
+// TODO show QR code for current headline when long-press OK
+
 public class ConfigActivity extends Activity {
 	public static final String LOG_TAG = "ConfigActivity";
 	public static final String PREFS_NAME = "preferences";
@@ -445,7 +448,7 @@ public class ConfigActivity extends Activity {
 			// live TV
 			handler.post(new Runnable() {
 				public void run() {
-					AlarmReceiver.startMainActivity(ConfigActivity.this);
+					AlarmReceiver.startMainActivity(ConfigActivity.this, true);
 				}
 			});
 		}

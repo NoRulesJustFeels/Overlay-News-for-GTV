@@ -238,50 +238,54 @@ public class Dialogs {
 		dialog.setContentView(R.layout.sites_list);
 
 		ListView listView = (ListView) dialog.findViewById(R.id.list);
-		ArrayList<RssFeed> feeds = FeedsTable.getFeeds(context);
-		Collections.sort(feeds, new Comparator<RssFeed>() {
+		try {
+			ArrayList<RssFeed> feeds = FeedsTable.getFeeds(context);
+			Collections.sort(feeds, new Comparator<RssFeed>() {
 
-			@Override
-			public int compare(RssFeed lhs, RssFeed rhs) {
-				return lhs.getTitle().toLowerCase().compareTo(rhs.getTitle().toLowerCase());
-			}
+				@Override
+				public int compare(RssFeed lhs, RssFeed rhs) {
+					return lhs.getTitle().toLowerCase().compareTo(rhs.getTitle().toLowerCase());
+				}
 
-		});
-		final RssFeedAdapter feedAdapter = new RssFeedAdapter(context, feeds);
-		listView.setAdapter(feedAdapter);
-		listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+			});
+			final RssFeedAdapter feedAdapter = new RssFeedAdapter(context, feeds);
+			listView.setAdapter(feedAdapter);
+			listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				context.showCover(false);
-				dialog.dismiss();
-			}
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					context.showCover(false);
+					dialog.dismiss();
+				}
 
-		});
-		listView.setOnItemLongClickListener(new android.widget.AdapterView.OnItemLongClickListener() {
+			});
+			listView.setOnItemLongClickListener(new android.widget.AdapterView.OnItemLongClickListener() {
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				RssFeed feed = (RssFeed) parent.getAdapter().getItem(position);
-				context.showCover(false);
-				dialog.dismiss();
-				displayDeleteFeed(context, feed);
-				return false;
-			}
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+					RssFeed feed = (RssFeed) parent.getAdapter().getItem(position);
+					context.showCover(false);
+					dialog.dismiss();
+					displayDeleteFeed(context, feed);
+					return false;
+				}
 
-		});
-		listView.setDrawingCacheEnabled(true);
-		dialog.setOnDismissListener(new OnDismissListener() {
+			});
+			listView.setDrawingCacheEnabled(true);
+			dialog.setOnDismissListener(new OnDismissListener() {
 
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				context.showCover(false);
-			}
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					context.showCover(false);
+				}
 
-		});
-		context.showCover(true);
-		dialog.show();
-		Analytics.logEvent(Analytics.DIALOG_FEEDS);
+			});
+			context.showCover(true);
+			dialog.show();
+			Analytics.logEvent(Analytics.DIALOG_FEEDS);
+		} catch (Exception e) {
+			Log.e(LOG_TAG, "displaySites", e);
+		}
 
 	}
 

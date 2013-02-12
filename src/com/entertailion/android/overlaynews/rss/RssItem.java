@@ -23,7 +23,7 @@ import android.graphics.Bitmap;
  * Data structure for RSS item. See RssFeed.
  * 
  * @author leon_nicholls
- *
+ * 
  */
 public class RssItem implements Comparable<RssItem> {
 	private int id;
@@ -44,7 +44,6 @@ public class RssItem implements Comparable<RssItem> {
 	}
 
 	public RssItem() {
-
 	}
 
 	public int getId() {
@@ -103,7 +102,7 @@ public class RssItem implements Comparable<RssItem> {
 			return 0;
 		}
 	}
-	
+
 	// cache the feed logo bitmap
 	public Bitmap getBitmap() {
 		return bitmap;
@@ -112,6 +111,5 @@ public class RssItem implements Comparable<RssItem> {
 	public void setBitmap(Bitmap bitmap) {
 		this.bitmap = bitmap;
 	}
-
 
 }

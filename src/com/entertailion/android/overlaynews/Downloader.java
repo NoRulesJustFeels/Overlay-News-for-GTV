@@ -88,6 +88,14 @@ public class Downloader {
 					String rss = Utils.getRssFeed(feed.getLink(), context, true);
 					RssHandler rh = new RssHandler();
 					RssFeed rssFeed = rh.getFeed(rss);
+					if (rssFeed.getTitle()==null) {
+						try {
+							Uri uri = Uri.parse(feed.getLink());
+							rssFeed.setTitle(uri.getHost());
+						} catch (Exception e) {
+							Log.e(LOG_TAG, "get host", e);
+						}
+					}
 					Uri uri = Uri.parse(feed.getLink());
 					Log.d(LOG_TAG, "host=" + uri.getScheme() + "://" + uri.getHost());
 					String icon = Utils.getWebSiteIcon(context, "http://" + uri.getHost());
@@ -132,11 +140,13 @@ public class Downloader {
 							rssFeed.getImage(), rssFeed.getTtl());
 					ItemsTable.deleteItems(context, feed.getId());
 					for (RssItem item : rssFeed.getItems()) {
-						time = 0;
-						if (item.getDate() != null) {
-							time = item.getDate().getTime();
+						if (item.getTitle()!=null) {
+							time = 0;
+							if (item.getDate() != null) {
+								time = item.getDate().getTime();
+							}
+							ItemsTable.insertItem(context, feed.getId(), item.getTitle(), item.getLink(), item.getDescription(), item.getContent(), time);
 						}
-						ItemsTable.insertItem(context, feed.getId(), item.getTitle(), item.getLink(), item.getDescription(), item.getContent(), time);
 					}
 					// release resources
 					Bitmap bitmap = rssFeed.getBitmap();

@@ -4,9 +4,9 @@
     <string name="app_name">Overlay News</string>
     <string name="app_name_caps">OVERLAY NEWS</string>
     <string name="timing_select">Schedule</string>
-    <string name="timing_1">At every 30 mins of every hour</string>
+    <string name="timing_1">At the top and bottom of every hour</string>
     <string name="timing_2">At the top of each hour</string>
-    <string name="timing_3">At the top of each 2nd hour</string>
+    <string name="timing_3">At the top of every other hour</string>
     <string name="duration_select">Duration</string>
     <string name="duration_1">15 sec</string>
     <string name="duration_2">30 sec</string>
@@ -29,6 +29,7 @@
     <string name="button_add">Add Site</string>
     <string name="button_view">View Sites</string>
     <string name="site_added">Site added: %s</string>
+    <string name="unknown">unknown</string>
 
     <!-- Default feeds -->
     <string name="feed1_title">Top Stories - Google News</string>

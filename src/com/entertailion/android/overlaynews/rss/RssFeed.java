@@ -29,7 +29,7 @@ import com.entertailion.android.overlaynews.R;
  * Data structure for RSS feed
  * 
  * @author leon_nicholls
- *
+ * 
  */
 public class RssFeed implements Comparable<RssFeed> {
 	private int id;
